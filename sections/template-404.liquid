@@ -1,0 +1,36 @@
+<div class="container">
+  <h2>{{ section.settings.title }}</h2>
+  <p>{{ section.settings.subtitle }}</p>
+  <a href="">Back To Homepage</a>
+</div>
+
+<style>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Template 404",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "404 Title",
+      "default": "404"
+    },
+
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "404 Sub Title",
+      "default": "The page u are looking for is not exist"
+    }
+  ]
+}
+{% endschema %}
