@@ -1,0 +1,36 @@
+{
+    "sections": {
+      "template": {
+        "type": "template-collection",
+        "blocks": {
+
+          "title" : {
+
+            "type" : "product_title"
+
+          },
+          
+          
+          "price" : {
+
+            "type" : "product_price"
+
+          },
+          
+          "button" : {
+
+            "type" : "product_btn"
+
+          }
+
+
+        } ,
+
+        "block_order" : ["title", "price", "button"]
+      }
+    },
+    "order": [
+      "template"
+    ]
+  }
+  

@@ -1,0 +1,30 @@
+<div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden flex flex-col">
+  {%- if product.featured_image -%}
+    <img
+      src="{{ product.featured_image | image_url: medium}}"
+      alt="{{ product.title }}"
+      class="w-full h-64 object-cover"
+    >
+  {%- else -%}
+    <div class="w-full h-64 bg-gray-100 flex items-center justify-center">
+      {{ 'image' | placeholder_svg_tag: 'w-20 h-20 text-gray-400' }}
+    </div>
+  {%- endif -%}
+
+  <div class="p-4 flex flex-col flex-grow">
+    <a href="{{ product.url }}" class="text-lg font-semibold text-gray-800 hover:text-blue-600 transition mb-2">
+      {{ product.title }}
+    </a>
+
+    <p class="text-blue-600 text-sm font-medium mb-4">
+      {{ product.price | money }}
+    </p>
+
+    <a
+      href="{{ product.url }}"
+      class="mt-auto inline-block text-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition"
+    >
+      View Product
+    </a>
+  </div>
+</div>

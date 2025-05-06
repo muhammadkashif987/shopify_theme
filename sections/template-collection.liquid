@@ -1,0 +1,93 @@
+<div class="container mx-auto px-4 py-10">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+    {%- paginate collection.products by section.settings.products_per_pages -%}
+      {%- for product in collection.products -%}
+        <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden flex flex-col">
+          {%- if product.featured_image -%}
+            <img
+              src="{{ product.featured_image | image_url: medium}}"
+              alt="{{ product.title }}"
+              class="w-full h-64 object-cover"
+            >
+          {%- else -%}
+            <div class="w-full h-64 bg-gray-100 flex items-center justify-center">
+              {{ 'image' | placeholder_svg_tag: 'w-20 h-20 text-gray-400' }}
+            </div>
+          {%- endif -%}
+
+          <div class="p-4 flex flex-col flex-grow">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'product_title' -%}
+                  <a
+                    href="{{ product.url }}"
+                    class="text-lg font-semibold text-gray-800 hover:text-blue-600 transition mb-2"
+                  >
+                    {{ product.title }}
+                  </a>
+
+                {%- when 'product_price' -%}
+                  <p class="text-blue-600 text-sm font-medium mb-4">
+                    {{ product.price | money }}
+                  </p>
+
+                {%- when 'product_btn' -%}
+                  <a
+                    href="{{ product.url }}"
+                    class="mt-auto inline-block text-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition"
+                  >
+                    View Product
+                  </a>
+
+                {%- else -%}
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        </div>
+
+      {%- else -%}
+        <p class="col-span-3 text-center text-gray-500">There are no products in this collection.</p>
+      {%- endfor -%}
+    {%- endpaginate -%}
+  </div>
+
+  <div class="mt-10">
+    {{ paginate | default_pagination }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "products-collection",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "step": 1,
+      "min": 1,
+      "max": 6,
+      "label": "Prdoducts Per Page",
+      "default": 6
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "product_title",
+      "name": "Product Title",
+      "limit": 1
+    },
+
+    {
+      "type": "product_price",
+      "name": "Product Price",
+      "limit": 1
+    },
+    {
+      "type": "product_btn",
+      "name": "Product Button",
+      "limit": 1
+    }
+  ]
+}
+{% endschema %}
